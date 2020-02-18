@@ -1,0 +1,10 @@
+<h1 class="text-center">Редактировать товар</h1>
+
+<%= simple_form_for @item do |f| %>
+
+<%= render partial: "form", locals: {f: f} %>
+
+<p>
+  &emsp;<button class="btn btn-success" type="submit">Редактировать товар</button>
+</p>
+<% end %>

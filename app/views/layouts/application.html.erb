@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyStore</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag   'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style="color:#2F4F4F; background-color:#DCDCDC">
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+
+    <a class="navbar-brand" href=<%= home_path %>>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/768px-Ruby_logo.svg.png" width="30" height="30" alt=""> MyStore</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <% if user_signed_in? %>
+          <li class="p-2 text-dark"><%= link_to "Выйти", destroy_user_session_path, :method => :delete, class: 'btn btn-sm btn-outline-light' %></li>
+        <% else %>
+          <li class="p-2 text-dark"><%= link_to "Войти", new_user_session_path, class: 'btn btn-sm btn-outline-light' %></li>
+          <% end %>
+        <li class="p-2 text-dark"><%= link_to "Просмотр товаров", items_path, class: 'btn btn-sm btn-outline-secondary' %></li>
+        <% if user_signed_in? && current_user.admin == true %>
+        <li class="p-2 text-dark"><%= link_to "Добавить товар", new_item_path, class: 'btn btn-sm btn-outline-secondary' %></li>
+        <% end %>
+      </ul>
+
+    <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Введите товар" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>&emsp;
+      </form>
+
+      <a class="navbar-brand" href=<%= cart_path %>>
+      <img src="https://st4.depositphotos.com/4326917/25543/v/1600/depositphotos_255436786-stock-illustration-shopping-cart-sign-vector-yellow.jpg" width="40" height="40" alt=""></a>
+    </div>
+  </nav>
+</header>
+
+  <div class="container">
+      <br><br><br><br>
+    <%= yield %>
+  </div>
+  </body>
+</html>

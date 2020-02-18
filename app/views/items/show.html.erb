@@ -1,0 +1,58 @@
+<h2 style="color:#800000"><%= @item.name %></h2>
+
+<ul>
+  <li><b style="color:#800000">Цена: </b><%= @item.price %> p.</li>
+  <li><b style="color:#800000">Описание: </b><%= urls_to_images(@item.description) %>
+  </li>
+  <li><b style="color:#800000">Вес: </b><%= @item.weight %> г.</li>
+</ul>
+
+<% if user_signed_in? %>
+  <hr>
+  <%= link_to "Редактировать", edit_item_path(@item), class: 'btn btn-warning' %>
+&emsp;&emsp; <!-- добавить пробелы -->
+  <%= link_to "Удалить товар", item_path(@item), method: :delete, data: {confirm: "Вы уверены, что хотите удалить товар?"}, class: 'btn btn-danger' %>
+<% end %>
+
+
+ <% if @item.comments.empty? %>
+  <hr>
+  <% else %>
+  <hr><h4>Все комментарии:</h4>
+  <% @item.comments.each do |comment|%>
+    <div class="alert alert-black">
+    <p><strong><%= comment.username %></strong>: <%= comment.body %></p>
+    </div>
+  <%end%>
+  <%end%>
+
+
+
+<% if user_signed_in? %>
+
+  <h5 style="color:#800000">Добавить комментарий</h5><hr>
+
+  <%= form_for([@item, @item.comments.build]) do |f| %>
+  <p>
+    Пользователь<br>
+    <%= f.text_field(:username, {:class => 'form-control'}) %>
+  </p>
+
+  <p>
+    Каментарий <br>
+    <%= f.text_area(:body, {:class => 'form-control'})  %>
+  </p>
+
+  <p>
+    <%= f.submit("Добавить комментарий", {:class => 'btn btn-warning'})  %>
+  </p>
+
+  <% end %>
+
+    <% else %>
+
+    <h5 style="color:#800000">Добавлять комментарии могут только авторизованные пользователи.</h5>
+
+    <% end %>
+
+<br><%= render "shared/email" %>

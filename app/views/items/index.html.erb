@@ -1,0 +1,39 @@
+
+  <h3><tr>
+    <td> Все товары </td>
+    <td> &emsp;&emsp; <%= link_to "Показать дорогие", expensive_items_path, class: 'btn btn-sm btn-outline-secondary' %></td>
+    <td> <%= link_to "Показать дешевые", cheap_items_path, class: 'btn btn-sm btn-outline-secondary' %></td>
+    <td> &emsp; <%= link_to "Сброс", items_path, class: 'btn btn-sm  btn-outline-secondary' %></td>
+    <td><h6> &emsp;&emsp; Цена: &emsp;<%= text_field_tag :price_from, nil,  placeholder: 'от', width: 10 %>&emsp;<%= text_field_tag :price_from, nil,  placeholder: 'до' %>&emsp;<%= link_to "Найти", find_items_path(:price_from), class: 'btn btn-sm btn-outline-secondary' %></h6></td>
+  </tr></h3>
+
+
+
+<%if @items.empty? %>
+  <br><br><br><b>Нет товаров.</b>
+  <% else %>
+
+
+
+  <div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <tr>
+      <th>Id</th>
+      <th>&emsp; Название</th>
+      <th> &emsp;Цена</th>
+      <th> </th>
+      <th>&emsp;&emsp;Рейтинг</th>
+    </tr>
+
+<% @items.each do |i| %>
+  <tr>
+    <td><%= i.id %></td>
+    <td><%= link_to i.name, item_path(i) %></td>
+    <td><%= i.price %> руб.</td>
+    <td><%= link_to "Добавить в корзину", href="#", class: 'btn btn-sm btn-outline-dark' %></td>
+    <td>(<%= i.votes_count %>) &emsp;<%= link_to "Голосовать", upvote_item_path(i), class: 'btn btn-sm btn-outline-secondary' %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+</div>

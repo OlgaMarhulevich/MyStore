@@ -1,0 +1,10 @@
+<h2 class="text-center">Добавить новый товар в магазин</h2>
+
+<%= simple_form_for @item do |f| %>
+
+<%= render partial: "form", locals: {f: f} %>
+
+<p>
+  &emsp;<button class="btn btn-success" type="submit">Добавить товар</button>
+</p>
+<% end %>

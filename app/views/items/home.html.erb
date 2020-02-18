@@ -1,0 +1,16 @@
+<body class="text-center">
+<h1>Главная страница сайта</h1>
+
+<% if user_signed_in? %>
+    <h5>Добро пожаловать на наш сайт, <%= current_user.login %>!</h5>
+    <% if current_user.admin %>
+        <br><br><br><%= @users_count %><%= link_to "Колличество пользователей", href="/admin/users_count", class: 'btn btn-sm btn-outline-dark' %>
+    <% end %>
+<% else %>
+  <hr>
+  <%= render partial: "shared/email" %>
+<% end %>
+
+
+
+</body>
