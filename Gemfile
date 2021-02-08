@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 
 gem 'haml-rails'
-gem 'carrierwave','~> 1.0'
+gem 'carrierwave','~> 1.3'
 gem 'devise'
 gem 'simple_form'
 gem 'exception_notification'
